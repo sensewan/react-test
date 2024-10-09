@@ -9,13 +9,17 @@ function BoilingVerdict(props) {
 }
 
 function toCelsius(fahrenheit) {
+    console.log("celsius가 작동중");
+    
     return ((fahrenheit - 32) * 5) / 9;
 }
 
 function toFahrenheit(celsius) {
+    console.log("fahrenheit이 작동중");
     return (celsius * 9) / 5 + 32;
 }
 
+//                                  ↱ 함수를 받아서 사용한다.
 function tryConvert(temperature, convert) {
     const input = parseFloat(temperature);
     if (Number.isNaN(input)) {
@@ -33,7 +37,7 @@ function Calculator(props) {
 
     const handleCelsiusChange = (temperature) => {
         setTemperature(temperature);
-        setScale("c");
+        setScale("c1");
     };
 
     const handleFahrenheitChange = (temperature) => {
@@ -41,23 +45,24 @@ function Calculator(props) {
         setScale("f");
     };
 
-    // 화씨와 섭씨 동시에 변경해주기
+    // 화씨와 섭씨 동시에 변경해주기 scale이 변경 되면 알아서 작동 하는 것 같음...
+    // 아니면 temperature가 변경이 되면 알아서 작동하나??
     const celsius =
         scale === "f" ? tryConvert(temperature, toCelsius) : temperature;
 
     const fahrenheit =
-        scale === "c" ? tryConvert(temperature, toFahrenheit) : temperature;
+        scale === "c1" ? tryConvert(temperature, toFahrenheit) : temperature;
 
     return (
         <div>
             <TemperatureInput 
-                scale = "c"
-                temperature = {celsius}
+                scale3 = "c"
+                temperature3 = {celsius}
                 onTemperatureChange = {handleCelsiusChange}
             />
             <TemperatureInput 
-                scale = "f"
-                temperature = {fahrenheit}
+                scale3 = "f"
+                temperature3 = {fahrenheit}
                 onTemperatureChange = {handleFahrenheitChange}
             />
             <BoilingVerdict celsius={parseFloat(celsius)}/>
